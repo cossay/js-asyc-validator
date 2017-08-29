@@ -4,7 +4,7 @@ const util = require('../util');
 module.exports = util.createRule(function () {
     return function (choices, message) {
         return function (field, value, source) {
-            if (!util.isEmpty(value) && !isIn(value, choices || [])) {
+            if (!util.isEmpty(value) && !isIn(util.toString(value), choices || [])) {
                 return Promise.reject(util.createError(field, message || 'This is not valid choice.'))
             }
 

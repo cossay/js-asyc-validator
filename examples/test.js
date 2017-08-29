@@ -8,7 +8,6 @@ const schema = new Schema();
 const rules = cossay.Rules;
 
 schema.addRule('name', [rules.required(), rules.alpha(), rules.length(4, 'Name must have exactly 4 characters')]);
-schema.addRule('name', rules.required());
 schema.addRule('email', [rules.required(), rules.email()]);
 schema.addRule('phone', [rules.required(), rules.phone(), rules.alphanumeric()]);
 schema.addRule('birthdate', [rules.required(), rules.date(), rules.between('22-10-2001', '22-10-2014')]);
@@ -41,7 +40,7 @@ schema.addRule('age', legalAge());
 
 const v = new Validator(schema);
 const source = {
-    name: 'Agbi',
+    name: undefined,
     email: 'agbitorcosman@gmail.com',
     phone: '0545277656',
     birthdate: '11-22-2012',

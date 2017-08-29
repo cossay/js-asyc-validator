@@ -4,7 +4,7 @@ const util = require('../util');
 module.exports = util.createRule(function () {
     return function (message) {
         return function (field, value, source) {
-            if (!util.isEmpty(value) && !isFloat(value)) {
+            if (!util.isEmpty(value) && !isFloat(util.toString(value))) {
                 return Promise.reject(util.createError(field, message || 'This is not valid floating point number.'))
             }
 

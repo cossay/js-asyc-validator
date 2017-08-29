@@ -46,7 +46,7 @@ Validator.prototype.validate = function (data) {
             var rules = this.schema.get(field);
             if (rules.length) {
                 rules.forEach((rule) => {
-                    var promise = rule(field, String(data[field]), data);
+                    var promise = rule(field, data[field], data);
                     if (promise instanceof Promise) {
                         compiledPromises.push(promise.catch(catchHandler).then(thenHandler));
                     }
