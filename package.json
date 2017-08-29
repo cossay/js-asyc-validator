@@ -1,0 +1,20 @@
+{
+  "name": "cosman-validator",
+  "version": "1.0.0",
+  "description": "Async validator for nodejs",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "validator",
+    "async"
+  ],
+  "author": "Agbitor Cosman <agbitorcosman@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.18.1",
+    "validator": "^8.1.0"
+  }
+}
