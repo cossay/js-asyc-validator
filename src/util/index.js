@@ -5,5 +5,6 @@ module.exports = {
     isEmpty: require('./empty'),
     isDate: require('./is-date'),
     toString: require('./to-string'),
+    length: require('./length'),
     createDate: require('./date-to-moment')
 }

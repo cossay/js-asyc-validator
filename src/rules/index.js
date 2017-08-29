@@ -14,5 +14,7 @@ module.exports = {
     float: require('./float'),
     ip: require('./ip'),
     in: require('./in'),
-    length: require('./length')
+    length: require('./length'),
+    minlength: require('./min-length'),
+    maxlength: require('./max-length')
 };
