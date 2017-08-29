@@ -1,5 +1,6 @@
 const Schema = require('./Schema');
 const ValidationError = require('./ValidationError');
+const ValidatedValue = require('./ValidatedValue');
 
 /**
  * Validator constructor
@@ -15,14 +16,15 @@ function Validator(schema) {
 }
 
 /**
- * Validates a given data against provider schema
+ * Validates a given data against provided schema
  * @param {Map<string, any>} data
  */
 Validator.prototype.validate = function (data) {
     return new Promise((resolve, reject) => {
         data = data || {};
         var violations = {};
-        var compilePromises = [];
+        var compiledPromises = [];
+        var validatedData = {};
 
         function catchHandler(error) {
             if (error instanceof ValidationError) {
@@ -34,20 +36,26 @@ Validator.prototype.validate = function (data) {
             }
         }
 
+        function thenHandler(value) {
+            if (value instanceof ValidatedValue) {
+                validatedData[value.getField()] = value.getValue();
+            }
+        }
+
         Object.keys(this.schema.getRules()).forEach((field) => {
             var rules = this.schema.get(field);
             if (rules.length) {
                 rules.forEach((rule) => {
                     var promise = rule(field, String(data[field]), data);
                     if (promise instanceof Promise) {
-                        compilePromises.push(promise.catch(catchHandler));
+                        compiledPromises.push(promise.catch(catchHandler).then(thenHandler));
                     }
                 });
             }
         });
 
-        return Promise.all(compilePromises).then(function () {
-            return Object.keys(violations).length ? reject(violations) : resolve(data);
+        return Promise.all(compiledPromises).then(function (i) {
+            return Object.keys(violations).length ? reject(violations) : resolve(validatedData);
         }).catch(function (errors) {
             return reject(errors);
         });

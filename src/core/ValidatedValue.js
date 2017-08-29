@@ -1,34 +1,34 @@
 /**
  * Object representing a successfully validated field
  * @constructor
- * @param {string} name 
+ * @param {string} field 
  * @param {any} value 
  */
-function ValidatedField(name, value) {
+function ValidatedField(field, value) {
 
     if (!(this instanceof ValidatedField)) {
-        return new ValidatedField(name, value)
+        return new ValidatedField(field, value)
     }
 
-    this.name = name;
+    this.field = field;
     this.value = value;
 }
 
 /**
- * Returns name for this field
+ * Returns field for this value
  * @return {string}
  */
-ValidatedField.prototype.getName = function () {
-    return this.name;
+ValidatedField.prototype.getField = function () {
+    return this.field;
 };
 
 /**
- * Sets name for this field
- * @params {string} name
+ * Sets field for this value
+ * @params {string} field
  * @return {ValidatedField}
  */
-ValidatedField.prototype.setName = function (name) {
-    this.name = name;
+ValidatedField.prototype.setField = function (field) {
+    this.field = field;
 
     return this;
 };
